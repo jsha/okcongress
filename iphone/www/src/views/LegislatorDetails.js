@@ -62,6 +62,8 @@ Geo.views.LegislatorDetails = Ext.extend(Ext.Panel, {
         this.votes.on('itemtap', this.onVoteTap, this);
         this.bills.on('itemtap', this.onBillTap, this);        
 
+
+			
         this.billSummary.on('beforedeactivate', this.onBillSummaryDeactivate, this);
         this.on('activate', this.onPanelActivate, this);
         this.on('beforeactivate', this.onPanelBeforeActivate, this);
@@ -91,6 +93,8 @@ Geo.views.LegislatorDetails = Ext.extend(Ext.Panel, {
     
     onPanelActivate: function() {
         this.updateLegislatorTitle();
+				
+		
     },
     
     onBillSummaryDeactivate: function() {
@@ -144,6 +148,35 @@ Geo.views.LegislatorDetails = Ext.extend(Ext.Panel, {
         
         this.updateLegislatorTitle(r.data.title + ' ' + r.data.lastname);
         this.bio.update(r.data);
+
+		//find the addContact element
+		var elem = document.getElementById("addContact");
+		
+		//set up a notification to add a contact
+		var callback = function(){
+			navigator.notification.confirm(
+		        'Add '+r.data.firstname+' '+r.data.lastname+' to your contacts?',  // message
+		        addContact,              // callback to invoke with index of button pressed
+		        'Add Contact?',            // title
+		        'Okay,Cancel'          // buttonLabels
+		    );
+				
+		};
+	
+		//add the contact
+		function addContact() {
+			var myContact = navigator.contacts.create();
+			var name = new ContactName();
+			name.givenName = r.data.firstname;
+			name.familyName = r.data.lastname;
+			var phoneNumbers = [new ContactField('work', r.data.phone, true)];
+			myContact.phoneNumbers = phoneNumbers;
+			myContact.name = name;
+			myContact.save();
+		}
+		
+		elem.addEventListener('click', callback, true);
+
         
         if (!bills) {
             this.bills.update("Loading...");

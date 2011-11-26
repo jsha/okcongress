@@ -24,7 +24,7 @@
 	<false/>
 	<key>ExternalHosts</key>
 	<array>
-		<string></string>
+		<string>*.maxmind.com</string>
 		<string>*.yahooapis.com</string>
 		<string>*.google.com</string>
 		<string>*.govtrack.us</string>

@@ -10,13 +10,14 @@ Geo.views.StartScreen = Ext.extend(Ext.Panel, {
     activeItem: 0,
     titleTpl: new Ext.Template('<strong>{state}</strong> District {number}'),
     initComponent: function() {
-		navigator.notification.alert(
+		/*navigator.notification.alert(
 			"I'm New!", 
 			null, 
 			'test', 
 			'done'
 			);
 			
+			console.log("hi");*/
         this.settingsIcon = new Ext.Button({
             iconCls: 'settings',
             handler: this.onSettingsTap,

@@ -1,0 +1,12 @@
+# Xcode
+build/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+
+*.ipa
+
+.DS_Store
+xcuserdata
